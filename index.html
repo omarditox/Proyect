@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game con Imágenes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>🐱 MemoryCat Game </h1>
+
+    <div class="controls">
+        <label for="difficulty">Dificultad:</label>
+        <select id="difficulty">
+            <option value="facil">Fácil</option>
+            <option value="medio">Medio</option>
+            <option value="dificil">Difícil</option>
+        </select>
+        <button id="startBtn">Comenzar Juego</button>
+    </div>
+
+    <div class="stats">
+        <p>Intentos: <span id="attempts">0</span></p>
+        <p>Tiempo: <span id="timer">0</span>s</p>
+    </div>
+
+    <div class="game-board" id="gameBoard"></div>
+
+    <!-- Pre-carga de imágenes (ocultas) -->
+    <div style="display:none;">
+        <img src="/Imagenes/aycabron.jpg" alt="aycabron">
+        <img src="/Imagenes/cat_o_O.jpg" alt="cat_o_O">
+        <img src="/Imagenes/cat_smoke.jpg" alt="cat_smoke">
+        <img src="/Imagenes/cat_w_.jpg" alt="cat_w_">
+        <img src="/Imagenes/catlol.jpg" alt="catlol">
+        <img src="/Imagenes/catZzz.jpg" alt="">
+        <img src="/Imagenes/esqueleto.jpg" alt="">
+        <img src="/Imagenes/ommmm.jpg" alt="">
+        <img src="/Imagenes/pensamiento.jpg" alt="">
+        <img src="/Imagenes/rock.jpg" alt="">
+        <img src="/Imagenes/Silly_Dog.jpg" alt="">
+        <img src="/Imagenes/swag.jpg" alt="">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
