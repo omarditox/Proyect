@@ -1,3 +1,7 @@
+const isGitHubPages = window.location.hostname.includes('github.io');
+const basePath = isGitHubPages ? '/Proyect/' : './';
+
+// Cartas
 const allCards = [
     'aycabron', 'cat_o_O', 'cat_smoke', 'cat_w_',
     'catlol', 'catZzz', 'esqueleto', 'ommmm',
@@ -5,11 +9,11 @@ const allCards = [
 ];
 
 // Elementos
-let gameBoard = document.getElementById('gameBoard');
-let attemptsDisplay = document.getElementById('attempts');
-let timerDisplay = document.getElementById('timer');
-let startBtn = document.getElementById('startBtn');
-let difficultySelect = document.getElementById('difficulty');
+const gameBoard = document.getElementById('gameBoard');
+const attemptsDisplay = document.getElementById('attempts');
+const timerDisplay = document.getElementById('timer');
+const startBtn = document.getElementById('startBtn');
+const difficultySelect = document.getElementById('difficulty');
 
 // Variables del juego
 let attempts = 0;
@@ -21,16 +25,16 @@ let gameCards = [];
 let maxTime = 120;
 
 // Sonidos
-const soundStart = new Audio('audio/sound-gamestart.mp3');
-const soundMatch = new Audio('audio/sound-acertado.mp3');
-const soundWin = new Audio('audio/sound-gamewin.mp3');
-const soundLose = new Audio('audio/sound-gamelose.mp3');
+const soundStart = new Audio(`${basePath}audio/sound-gamestart.mp3`);
+const soundMatch = new Audio(`${basePath}audio/sound-acertado.mp3`);
+const soundWin = new Audio(`${basePath}audio/sound-gamewin.mp3`);
+const soundLose = new Audio(`${basePath}audio/sound-gamelose.mp3`);
 
 // Iniciar juego
 function startGame() {
-    soundStart.play();
+    soundStart.play().catch(e => console.log("No se pudo reproducir sonido:", e));
 
-    let difficulty = difficultySelect.value;
+    const difficulty = difficultySelect.value;
     let pairCount;
 
     if (difficulty === 'facil') {
@@ -44,23 +48,23 @@ function startGame() {
         maxTime = 60;
     }
 
-    let selectedCards = shuffleArray(allCards).slice(0, pairCount);
+    const selectedCards = shuffleArray(allCards).slice(0, pairCount);
     gameCards = [...selectedCards, ...selectedCards].sort(() => Math.random() - 0.5);
 
     createBoard();
     resetStats();
 }
 
-// tablero
+// Crear tablero
 function createBoard() {
     gameBoard.innerHTML = '';
     gameCards.forEach((imgName, index) => {
-        let card = document.createElement('div');
+        const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.index = index;
 
-        let img = document.createElement('img');
-        img.src = `/Imagenes/${imgName}.jpg`;
+        const img = document.createElement('img');
+        img.src = `${basePath}Imagenes/${imgName}.jpg`;
         img.alt = imgName;
         img.style.display = 'none';
         card.appendChild(img);
@@ -87,17 +91,17 @@ function flipCard() {
 
 // coincidencia
 function checkForMatch() {
-    let [card1, card2] = flippedCards;
-    let img1 = card1.querySelector('img').src;
-    let img2 = card2.querySelector('img').src;
+    const [card1, card2] = flippedCards;
+    const img1 = card1.querySelector('img').src;
+    const img2 = card2.querySelector('img').src;
 
     if (img1 === img2) {
         matchedPairs++;
-        soundMatch.play();
+        soundMatch.play().catch(e => console.log("No se pudo reproducir sonido:", e));
 
         if (matchedPairs === gameCards.length / 2) {
             clearInterval(timer);
-            soundWin.play();
+            soundWin.play().catch(e => console.log("No se pudo reproducir sonido:", e));
             setTimeout(() => {
                 alert(`¡Ganaste en ${attempts} intentos y ${seconds} segundos!`);
             }, 500);
@@ -114,7 +118,7 @@ function checkForMatch() {
     flippedCards = [];
 }
 
-// contador
+// Temporizador
 function startTimer() {
     clearInterval(timer);
     seconds = 0;
@@ -126,7 +130,7 @@ function startTimer() {
 
         if (seconds >= maxTime) {
             clearInterval(timer);
-            soundLose.play();
+            soundLose.play().catch(e => console.log("No se pudo reproducir sonido:", e));
             setTimeout(() => {
                 alert('¡Se acabó el tiempo! Debes mejorar...');
             }, 500);
@@ -148,5 +152,4 @@ function shuffleArray(array) {
     return [...array].sort(() => Math.random() - 0.5);
 }
 
-// Evento
 startBtn.addEventListener('click', startGame);
