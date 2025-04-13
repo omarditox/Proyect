@@ -25,10 +25,10 @@ let gameCards = [];
 let maxTime = 120;
 
 // Sonidos
-const soundStart = new Audio(`${basePath}audio/sound-gamestart.mp3`);
-const soundMatch = new Audio(`${basePath}audio/sound-acertado.mp3`);
-const soundWin = new Audio(`${basePath}audio/sound-gamewin.mp3`);
-const soundLose = new Audio(`${basePath}audio/sound-gamelose.mp3`);
+const soundStart = new Audio(`${basePath}Audio/sound-gamestart.mp3`);
+const soundMatch = new Audio(`${basePath}Audio/sound-acertado.mp3`);
+const soundWin = new Audio(`${basePath}Audio/sound-gamewin.mp3`);
+const soundLose = new Audio(`${basePath}Audio/sound-gamelose.mp3`);
 
 // Iniciar juego
 function startGame() {
